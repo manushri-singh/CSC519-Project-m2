@@ -1,0 +1,47 @@
+---
+  - name: "Installing mysql"
+    apt: package="mysql-server" state="present"
+    environment:
+      DEBIAN_FRONTEND=noninteractive
+    become: yes
+
+  - name: Changing mySQL plugin to use password
+    shell: "mysql -u root -e \"USE mysql; UPDATE user SET plugin=\'mysql_native_password\' WHERE User=\'root\'; FLUSH PRIVILEGES;\""
+    become: true
+  
+  - name: "Disable Case Sensitivity and increase connections"
+    template: src=sql_template.cnf.j2 dest={{ mysql_location }}/mysqld.cnf
+    become: yes
+
+  - name: "Restart mysql service"
+    service: name=mysql state=restarted
+    become: yes
+
+  - name: check if directory exists
+    stat: path="{{ansible_env.HOME}}/iTrust"
+    register: p
+
+  - name: clone iTrust
+    git:
+      repo: "{{github_iTrust_authenticated}}" 
+      dest: "{{ansible_env.HOME}}/iTrust"
+    when: not p.stat.exists
+
+  - name: Setup hooks
+    copy:
+      src: pre-push
+      dest: "{{ansible_env.HOME}}/iTrust/.git/hooks/"
+      mode: 0755
+
+
+  - name: Install dependencies
+    apt:
+      pkg: "{{item}}"
+      state: present
+      update_cache: yes
+    become: yes
+    with_items:
+      - npm
+      - nodejs-legacy
+      - curl
+...

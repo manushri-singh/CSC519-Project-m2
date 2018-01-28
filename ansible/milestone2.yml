@@ -1,0 +1,4 @@
+---
+- include: setupiTrust.yml
+- include: setupCheckbox.yml
+...

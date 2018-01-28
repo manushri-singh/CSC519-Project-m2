@@ -1,0 +1,119 @@
+var glob = require("glob"),
+    Random = require("random-js"),
+    fs = require('fs');
+const execSync = require('child_process').execSync;
+
+const util = require('util');
+
+var getJavaFiles = function (dir) {
+    var javaFiles = [];
+    var files = glob.sync(dir + "/**/*.java")
+    files.forEach(function (file){
+        if(!file.match("/model/") && !file.match("/sql/") && !file.match("AddApptRequestAction"))
+            javaFiles.push(file);
+    })
+    return javaFiles;
+}
+
+var fuzzer = 
+{
+    random : function () { return new Random(Random.engines.mt19937().autoSeed())},
+
+    fuzzFile: function(filePath) {
+        var file = fs.readFileSync(filePath,'utf-8');
+        var lines = file.split('\n');
+        var tempFilePath = filePath + 'test';
+        if(fs.existsSync(tempFilePath))
+            fs.unlinkSync(tempFilePath);
+        
+        lines.forEach(function (line) {
+
+            if(line.match("while") || line.match("if"))
+            {
+                if(fuzzer.random().bool(0.3) && line.match(">"))
+                    line = line.replace('>','<');
+                if(fuzzer.random().bool(0.3) && line.match("<"))
+                    line = line.replace('<','>');
+                if(fuzzer.random().bool(0.3) && line.match("=="))
+                    line = line.replace('==','!=');
+                if(fuzzer.random().bool(0.3) && line.match("!="))
+                    line = line.replace('!=','==');
+            }
+
+            if(fuzzer.random().bool(0.4) && line.match('"((\\"|[^"])+0(\\"|[^"])*|(\\"|[^"])*0(\\"|[^"])+)"'))
+                line = line.replace('0','1');
+
+            if(fuzzer.random().bool(0.2) && line.match('\"(\\"|[^\"])*\"') && !line.match("//") 
+                    && !line.match("@"))
+                line = line.replace(/\"(\\"|[^\"])*\"/g, '"' + fuzzer.random().string(10) + '"')
+
+            fs.appendFileSync(tempFilePath, line + '\n');
+        });
+
+        fs.renameSync(tempFilePath, filePath);
+    }
+}
+
+function commit(masterSHA, commitNumber) {
+    // Stash the copy of changes
+    execSync("git stash");
+
+    // Ensure the HEAD is attached to actual branch (ie) fuzzer
+    execSync("git checkout fuzzer");
+
+    // Now apply all changes that are in stash
+    execSync("git checkout stash -- .");
+
+    // Commit with the masterSHA for which the fuzzing has been created
+    execSync(`git commit -m "Fuzzing commit for master: ` + masterSHA + ` Build #` + commitNumber + `"`);
+
+    // Push the changes to the fuzzer branch
+    execSync("git push origin fuzzer");
+
+    // Drop any stash and keep the stack clean
+    execSync("git stash drop");
+}
+
+function triggerJenkinsBuild(lastCommitSha) {
+    console.log("Triggering build for " + lastCommitSha);
+    execSync("curl 'http://{{jenkins_ip}}:8080/git/notifyCommit?url={{github_iTrust_project}}&sha1=" + lastCommitSha + "'");
+}
+
+function revertToOriginal(masterSHA) {
+    var fuzzerSHA = getSHA('fuzzer')
+    if(masterSHA != fuzzerSHA) {
+        execSync("git checkout " + masterSHA);
+    } 
+}
+
+function getSHA(param) {
+    return execSync('git rev-parse ' + param).toString().trim();
+}
+
+var commitFuzz = function (iterations) {
+    
+    var javaFiles = getJavaFiles("iTrust/src/main");
+
+    // make sure you are in the correct branch
+    execSync("git checkout fuzzer");
+
+    var masterSHA = getSHA('master');
+    while(iterations-- > 0)
+    {
+        // Start with a fresh state
+        // Revert commit
+        revertToOriginal(masterSHA);
+
+        javaFiles.forEach(function(file){
+            fuzzer.fuzzFile(file);
+        });
+
+        // Commit random changes
+        commit(masterSHA, iterations);
+
+        // Trigger build Jenkins build job for the latest commit on `Fuzzer` branch
+        triggerJenkinsBuild(getSHA('fuzzer'));
+    }
+}
+
+commitFuzz(100)

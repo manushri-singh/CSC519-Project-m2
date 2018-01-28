@@ -1,0 +1,62 @@
+---
+  - name: Copy iTrust Fuzzer job
+    template: src=iTrustFuzzer-job.xml.j2 dest=/tmp/iTrustFuzzerJob.xml
+
+  - name: Check if job exists
+    shell: "java -jar {{ jenkins_cli_jar_loc }}/jenkins-cli.jar -s http://{{ jenkins_ip }}:{{ jenkins_port }}/ list-jobs --username {{jenkins_username}} --password {{jenkins_password}}"
+    register: jenkins_cb_stat
+
+  - name: Checking git credentials In Jenkins
+    shell: "java -jar {{ jenkins_cli_jar_loc }}/jenkins-cli.jar -s http://{{ jenkins_ip }}:{{ jenkins_port }}/ get-credentials-as-xml \"SystemCredentialsProvider::SystemContextResolver::jenkins\" \"(global)\" \"jenkins-github-read-write-user\" --username {{jenkins_username}} --password {{jenkins_password}}"
+    register: git_creds
+    ignore_errors: yes
+    changed_when: "git_creds.stdout.find('jenkins-github-read-write-user') == -1"
+    become: yes
+
+  - name: Copying credentials xml
+    template:
+      src: gitCredentials.xml.j2 
+      dest: /tmp/credentials.xml
+    when: "git_creds.stdout.find('jenkins-github-read-write-user') == -1"
+
+  - name: Adding credentials to jenkins for monitoring Travis
+    shell: "cat /tmp/credentials.xml | java -jar {{ jenkins_cli_jar_loc }}/jenkins-cli.jar -s http://{{ jenkins_ip }}:{{ jenkins_port }}/ create-credentials-by-xml \"SystemCredentialsProvider::SystemContextResolver::jenkins\" \"(global)\" --username {{jenkins_username}} --password {{jenkins_password}}"
+    when: "git_creds.stdout.find('jenkins-github-read-write-user') == -1"
+
+  - name: create jenkins jobs with xml files
+    shell: "java -jar {{ jenkins_cli_jar_loc }}/jenkins-cli.jar -s http://{{ jenkins_ip }}:{{ jenkins_port }}/ create-job {{jenkins_iTrust_fuzzer_job_name}} < /tmp/iTrustFuzzerJob.xml --username {{jenkins_username}} --password {{jenkins_password}}"
+    when: jenkins_cb_stat.stdout.find(jenkins_iTrust_fuzzer_job_name)==-1
+
+  - name: Copy fuzzing files to Jenkins home dir
+    copy:
+      src: fuzzing/package.json
+      dest: "{{ansible_env.HOME}}/iTrust/"
+
+  - name: Copy fuzz.js template
+    template:
+      src: fuzz.js.j2
+      dest: "{{ansible_env.HOME}}/iTrust/fuzz.js"
+  
+  - name: Install packages based on package.json.
+    npm:
+      path: "{{ansible_env.HOME}}/iTrust/"
+
+  - name: Copy useless tests program to Jenkins home dir
+    copy:
+      src: uselesstests
+      dest: "{{jenkins_home_dir}}"
+      owner: jenkins
+      group: jenkins
+    become: yes
+
+  - name: Create a template file for iTrust build job
+    template: src=iTrust-job.xml.j2 dest=/tmp/itrust_temp.xml
+
+  - name: create iTrust jenkins jobs with xml files
+    become: yes
+    shell: "java -jar {{ jenkins_cli_jar_loc }}/jenkins-cli.jar -s http://{{ jenkins_ip }}:{{ jenkins_port }}/ create-job {{ jenkins_iTrust_job_name }} < /tmp/itrust_temp.xml --username {{jenkins_username}} --password {{jenkins_password}}"
+    when: jenkins_cb_stat.stdout.find(jenkins_iTrust_job_name)==-1
+
+  - name: Build Jenkins Job for iTrust
+    become: yes
+    shell: "java -jar {{ jenkins_cli_jar_loc }}/jenkins-cli.jar -s http://{{ jenkins_ip }}:{{ jenkins_port }}/ build {{ jenkins_iTrust_job_name }} --username {{jenkins_username}} --password {{jenkins_password}} -s"

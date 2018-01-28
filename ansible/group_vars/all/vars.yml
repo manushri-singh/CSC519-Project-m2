@@ -1,0 +1,28 @@
+
+jenkins_ip: localhost
+jenkins_port: 8080
+ansible_home_dir: "{{ ansible_env.HOME }}"
+jenkins_cli_jar_loc: "{{ansible_home_dir}}"
+jenkins_home_dir: /var/lib/jenkins/
+
+jenkins_iTrust_job_name: iTrustJob
+jenkins_iTrust_fuzzer_job_name: iTrust-fuzzer-job
+jenkins_checkbox_job_name: checkbox-job 
+
+jenkins_username: mkd_test1
+jenkins_password: !vault |
+      $ANSIBLE_VAULT;1.1;AES256
+      35613564316639383334356239393261366364326431313663396435363631396539663230386530
+      3639333765396633313435393630373637663763306236630a663264623132313662613663653761
+      35323234383363623365613237393665383064386439653730656565313639303964383530643364
+      3464333837376564390a613363326636363437646564363536393462356261396262633561656438
+      38343861353136386336333331633333343363633166373039303561356434323637
+
+jenkins:
+  url_username: "{{jenkins_username}}"
+  url_password: "{{jenkins_password}}"
+  url: "http://{{jenkins_ip}}:{{jenkins_port}}"
+  validate_certs: no
+
+github_iTrust_project: https://github.ncsu.edu/dmolugu/iTrust-v23.git
+github_iTrust_authenticated: https://{{ansible_env.GIT_ID}}:{{ansible_env.GIT_TOKEN}}@github.ncsu.edu/dmolugu/iTrust-v23.git

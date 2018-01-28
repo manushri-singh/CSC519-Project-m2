@@ -1,0 +1,163 @@
+---
+- name: Install Prerequisites
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+    - git
+    - maven
+    - build-essential
+  become: yes
+ 
+- name: Add Oracle Repository
+  apt_repository:
+    repo: 'ppa:webupd8team/java'
+  become: yes 
+- name: Accept Oracle License
+  debconf: 
+    name: 'oracle-java8-installer' 
+    question: 'shared/accepted-oracle-license-v1-1' 
+    value: 'true' 
+    vtype: 'select'
+  become: yes
+ 
+- name: Install Java
+  apt:
+    name: oracle-java8-installer    
+    state: present
+    update_cache: yes
+  become: yes
+ 
+- name: Add Jenkins Repository Key
+  apt_key:
+    url: "https://jenkins-ci.org/debian/jenkins-ci.org.key"
+    state: present
+    validate_certs: no
+  become: yes
+
+- name: Add Jenkins Source List
+  shell: echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list
+  become: yes
+ 
+- name: Install Jenkins
+  apt:
+    name: jenkins    
+    state: present
+    update_cache: yes
+  become: yes
+  register: jenkins_install
+ 
+- name: Copy the demo-config.xml file
+  template: 
+    src: demo-config.xml.j2 
+    dest: /var/lib/jenkins/config.xml
+  become: yes
+ 
+- name: Enable the firewall
+  ufw:
+    state: enabled
+    policy: allow
+  become: yes
+ 
+- name: Open port 8080
+  ufw:
+    rule: allow 
+    port: 8080
+  become: yes
+
+- name: Restart Jenkins
+  service:
+    name: jenkins
+    state: restarted
+  become: yes
+  when: jenkins_install.changed
+
+- name: Wait for restart
+  uri:
+    url: "http://{{jenkins_ip}}:{{jenkins_port}}/cli/"
+    status_code: 403
+  register: result
+  until: result.status == 403
+  retries: 60
+  delay: 10
+  when: jenkins_install.changed
+
+- name: Create a directory for Groovy
+  file:
+    path: "/var/lib/jenkins/init.groovy.d"
+    state: directory
+    mode: 0777
+  become: yes
+ 
+- name: Setup user script
+  template: 
+    src: jenkins_script.groovy.j2 
+    dest: /var/lib/jenkins/init.groovy.d/basic-security.groovy 
+    mode: 0777
+  become: yes
+
+- name: Turning off Jenkins setup wizard
+  lineinfile: dest=/etc/default/jenkins regexp='^JAVA_ARGS=' line='JAVA_ARGS="-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false"'
+  become: yes
+
+- name: Restart Jenkins (creates user through startup script)
+  service:
+    name: jenkins
+    state: restarted
+  become: yes
+
+- name: Wait for restart
+  uri:
+    url: "http://{{jenkins_ip}}:{{jenkins_port}}/cli/"
+    status_code: 200
+  register: result
+  until: result.status == 200
+  retries: 60
+  delay: 10
+
+- name: Remove User-Creation Script
+  file:
+    path: "/var/lib/jenkins/init.groovy.d/basic-security.groovy"
+    state: absent
+  become: yes
+ 
+- name: Install Jenkin Plugins
+  jenkins_plugin:
+    name: "{{ item }}"
+    params: "{{ jenkins }}"
+  with_items:
+    - github
+    - postbuild-task
+    - ws-cleanup
+    - jacoco
+    - random-string-parameter
+    - build-timeout
+  become: yes
+
+- name: Update Sudoers file for Jenkins User
+  lineinfile:
+    dest: /etc/sudoers
+    line: 'jenkins ALL=(ALL) NOPASSWD: ALL'
+  become: yes
+
+- name: Restart Jenkins (for plugins)
+  service:
+    name: jenkins
+    state: restarted
+  become: yes
+ 
+- name: Wait for restart
+  uri:
+    url: "http://{{jenkins_ip}}:{{jenkins_port}}/cli/"
+    status_code: 200
+  register: result
+  until: result.status == 200
+  retries: 60
+  delay: 10
+
+- name: Download Jenkins CLI jar file
+  get_url:
+    url: http://{{ jenkins_ip }}:{{ jenkins_port }}/jnlpJars/jenkins-cli.jar
+    dest: '{{ jenkins_cli_jar_loc }}/.'
+...

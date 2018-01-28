@@ -1,0 +1,95 @@
+commit cbb52c38fdd79939630d4309754d4470d4938f38
+tree 53b6866a1ac932b1f551b44d69501557cfa9c6e6
+parent f53f67d9e3c46d6263d56d882e0dfae29f8ff016
+author Dinesh Prasanth M K <dmolugu@ncsu.edu> 2017-10-24 02:12:05 -0400
+committer Dinesh Prasanth M K <dmolugu@ncsu.edu> 2017-10-24 02:12:05 -0400
+
+    Fuzzing commit for master: e6c0d26948a7a44b5aeb5c290e070baec0de858c
+    Build #54
+
+
+
+:100644 100644 b42fff922a5de647f5aef7856d8cae8ebb6ef338 a0a071716cb58f8c9f4178b7bf8121bc89d8d8b9 M	iTrust/src/main/edu/ncsu/csc/itrust/BeanBuilder.java
+:100644 100644 5494e9f76c0ab905f0ea7417b475f9c768a9904c 6a8fae6061c9d3ebca22093d7e16f6aa2abc59ad M	iTrust/src/main/edu/ncsu/csc/itrust/CSVParser.java
+:100644 100644 b69be441890de174d358bf61f896070dcc215291 658347f1bf3e790c03eb15bacf6137f3dfee1f55 M	iTrust/src/main/edu/ncsu/csc/itrust/DBUtil.java
+:100644 100644 99f7e53b3aef173a6d1d26f6971f6d7372ea4a4e 8ebe0d68da9cf78c292b44d07ecc6109234419e0 M	iTrust/src/main/edu/ncsu/csc/itrust/DateUtil.java
+:100644 100644 345fcf5b6d65d5ae84b07b4c7dc9dd4a69c9b805 e00cfdcde6ba0f5d1ce35848fced6de5782bb5ab M	iTrust/src/main/edu/ncsu/csc/itrust/HtmlEncoder.java
+:100644 100644 ab9435741d1d64dd46286da0bccd2767f5daf6a5 1e0be471d06d98195640c17b55b0e4fc170dcdfd M	iTrust/src/main/edu/ncsu/csc/itrust/Localization.java
+:100644 100644 71fa484d08a3b323ec3aa013dbf3d4d1e0c86adf e1fde103dc83231f30d79b3f2348116f8a600850 M	iTrust/src/main/edu/ncsu/csc/itrust/ParameterUtil.java
+:100644 100644 d42defcd3eaf64d866aa6ca98c3b3eae3d482efa 29799eff18f13507fd8f849bc8546cce0485255f M	iTrust/src/main/edu/ncsu/csc/itrust/XmlGenerator.java
+:100644 100644 81c9cf66e85d03a895e958ada84011af2283ee60 e6eed91b82aa428501304146763379804d2b6756 M	iTrust/src/main/edu/ncsu/csc/itrust/action/ActivityFeedAction.java
+:100644 100644 c8fff99e2bdc529bd8dd9ca660b54f32988d2710 cb03649656214d2c55f221515ec0b9530c81c1da M	iTrust/src/main/edu/ncsu/csc/itrust/action/AddApptAction.java
+:100644 100644 71e3de3e700882d238918dda3b6aedfea73f7868 886fc25ef0d40980d53b168905133c258779c779 M	iTrust/src/main/edu/ncsu/csc/itrust/action/AddDrugListAction.java
+:100644 100644 8b4a0204dbd7b23c3cafe937ec4ca2a00b5fe26e af9831ee21a709ee88e7363b17c6dbe0415341fb M	iTrust/src/main/edu/ncsu/csc/itrust/action/AddPatientFileAction.java
+:100644 100644 3b63e7c88e350f1c29ba09e5aa972d894363694d 67609288baef1205301df9935145f4b09353ff24 M	iTrust/src/main/edu/ncsu/csc/itrust/action/AddRemoteMonitoringDataAction.java
+:100644 100644 9136615a0006510eacce1f4c42c22fd38c614479 b83b4f36226894b4805b14ac18f8294ba65a838d M	iTrust/src/main/edu/ncsu/csc/itrust/action/AddUAPAction.java
+:100644 100644 55d1c0df4d81bb666f36da676d8b72bf0652486f 0385b9d7d9359439adbd987fa2841d7191f3d040 M	iTrust/src/main/edu/ncsu/csc/itrust/action/ChangePasswordAction.java
+:100644 100644 3642b873006ec0789151d5e01385ac1157e9e52f 57cc31048bd4e4dd9191c125a40740303b9d0594 M	iTrust/src/main/edu/ncsu/csc/itrust/action/ChangeSessionTimeoutAction.java
+:100644 100644 881deff98fc4e9fe7ab888011f8ba12d7995bd31 6bdfa1f9492be83906c05d780883929346c327eb M	iTrust/src/main/edu/ncsu/csc/itrust/action/DeclareHCPAction.java
+:100644 100644 356e87518bc251434dfb185a60708641c483a850 eb10763e7c1060998201f159826aea069f7ae9be M	iTrust/src/main/edu/ncsu/csc/itrust/action/DrugInteractionAction.java
+:100644 100644 ddfcec47b12d8f8648f47ce50635d3ab153188cd 0b71ec9c89841cd9e41ac058a070397ba676356d M	iTrust/src/main/edu/ncsu/csc/itrust/action/EditApptAction.java
+:100644 100644 b7b21a3abfa3a1cdbc7917e1b1f6c3365d2b50c0 2d178fcdef17964d26d980545e1a6f68208a4bd4 M	iTrust/src/main/edu/ncsu/csc/itrust/action/EditApptTypeAction.java
+:100644 100644 fa11726c8ea2605aa2aa855d3bd39d7dcaf5dda0 4e985cd51e69e7586c89ac9c5e95cbb36499e3de M	iTrust/src/main/edu/ncsu/csc/itrust/action/EditPersonnelAction.java
+:100644 100644 ac568cb3c4b7ba73d91f394ce1af24f1e86196d2 22c494778fbfc332a509ea2c98257008aa0e62f3 M	iTrust/src/main/edu/ncsu/csc/itrust/action/EditRepresentativesAction.java
+:100644 100644 e24fc977320c0a1b608c7024435280dcbf0269f8 a869c43919c66ce6a09e27ff35a636d457680a64 M	iTrust/src/main/edu/ncsu/csc/itrust/action/GroupReportAction.java
+:100644 100644 0c5908aa6db64cd99f13cc443d6f010049b64406 b7aa3dfc127747e8964ba7ecd4e6f1e3ea20d623 M	iTrust/src/main/edu/ncsu/csc/itrust/action/GroupReportGeneratorAction.java
+:100644 100644 6141392c91ee1332111c223c5a0b236bf1d62fb4 06a49c989f139b2778382c3d86425b533274cc57 M	iTrust/src/main/edu/ncsu/csc/itrust/action/LoginFailureAction.java
+:100644 100644 a1ae2e6f4bffdc00adaf278e89dd1ec439aa2076 b7e33328dc28ca4163dd01cf25c342ff6fc272f0 M	iTrust/src/main/edu/ncsu/csc/itrust/action/ManageHospitalAssignmentsAction.java
+:100644 100644 c48f4abdfef28f011449b5a99c752ed89bcea827 c0fc8f6200f7f1a8df47fed998ec648dd53ede95 M	iTrust/src/main/edu/ncsu/csc/itrust/action/PayBillAction.java
+:100644 100644 999d3c64be6072b2bc80d9c9f387c8f4f55acdc6 fe18ee4769cdc6cef9a37b4ef4e1b61dad2fe2bc M	iTrust/src/main/edu/ncsu/csc/itrust/action/RequestRecordsReleaseAction.java
+:100644 100644 458775b5dbf46c0dd28b1ae1e4444f0760ae8b59 f5cb74ff1dde4e4f0702168757cd7c7ec463a170 M	iTrust/src/main/edu/ncsu/csc/itrust/action/ResetPasswordAction.java
+:100644 100644 c0abc0efc0a2f67928939b6c99ecfdc4f97f00f5 f3aa3b6120067507fa6acb8babb7da7ffbabd652 M	iTrust/src/main/edu/ncsu/csc/itrust/action/SearchUsersAction.java
+:100644 100644 132c7736e8be62afdaf912f76cd87abb54e9ca7d b3e1ffa43af427156cc987a997d351d559a6202f M	iTrust/src/main/edu/ncsu/csc/itrust/action/SendMessageAction.java
+:100644 100644 c9daa11554cb48105387e74b7df87318d208d7b1 fc6b684c3f07106324adda61b377c5cd4359a467 M	iTrust/src/main/edu/ncsu/csc/itrust/action/UpdateHospitalListAction.java
+:100644 100644 eb17fc756bdadaa6f76424ee7aa7c5a93221f95b 00f78b7db2f0672bffc75f1a9c654dbc3952a1c5 M	iTrust/src/main/edu/ncsu/csc/itrust/action/UpdateNDCodeListAction.java
+:100644 100644 1144baabb0e8b771623a50c785a97835a9a15c0c cc082dccf47bbfb00429f6d8e8ffa8a8633ae00c M	iTrust/src/main/edu/ncsu/csc/itrust/action/UpdateReasonCodeListAction.java
+:100644 100644 d04c53614ad884bbdd01c0a9a56b09844e792963 736173f968827829790dd2325649cbfd206a8a0c M	iTrust/src/main/edu/ncsu/csc/itrust/action/ViewApptRequestsAction.java
+:100644 100644 388199a8a202ce140214fd69233c1b591f02fadc f02bde2c3b9f386d52c993d9dbd56936a86d96d9 M	iTrust/src/main/edu/ncsu/csc/itrust/action/ViewMyAccessLogAction.java
+:100644 100644 0d4741042ae7d71bb4ef8e997219cbd7044b224a ed835d677517ab557292f02ea003c78fdab5787e M	iTrust/src/main/edu/ncsu/csc/itrust/action/ViewMyMessagesAction.java
+:100644 100644 34dd1ef1231b97281fc1dfd00071949a550bb9c0 538a64eca9f730a8d91ccad29ddd86d5116eb0c7 M	iTrust/src/main/edu/ncsu/csc/itrust/action/ViewMyRecordsAction.java
+:100644 100644 3cc980b78bbf399f3cbb0ba93ff5c56bb0bda5c0 5043b619e13b4863410a703de8bd8984d01e9b88 M	iTrust/src/main/edu/ncsu/csc/itrust/action/ViewMyRemoteMonitoringListAction.java
+:100644 100644 a29dd5d537847d384eb33c13be868fcfd5806850 932d57063ed90ccca0bcdc947284532f31b9c1a4 M	iTrust/src/main/edu/ncsu/csc/itrust/action/ViewPatientAction.java
+:100644 100644 ce083b9f85059768225e3f124bfb0651315a17e0 8ca55fbfdfc138debef4581d03db4cb9d9cf544e M	iTrust/src/main/edu/ncsu/csc/itrust/action/ViewPersonnelAction.java
+:100644 100644 ca368329d0a670d458d3cd9338996ce84be1c9ab b9ea77cba213d02ce6e9967e3f1e4812c084bcc0 M	iTrust/src/main/edu/ncsu/csc/itrust/action/ZipCodeAction.java
+:100644 100644 a61c172aec5c44bd872a823eb6ed2735fc392543 04c3d02f6eec8505186613b66d3ba788220d2d5a M	iTrust/src/main/edu/ncsu/csc/itrust/controller/NavigationController.java
+:100644 100644 f4fb186518d3a56ec863a529fc07144629a7f208 26ea678b6d66f0c430d564c4ac27d9f07d646b20 M	iTrust/src/main/edu/ncsu/csc/itrust/controller/apptType/ApptTypeController.java
+:100644 100644 a54ff166aced011d3fb2963013c5015f0f88291d 4a3d59e1f7408ad2412efa3bc42f041a36dab164 M	iTrust/src/main/edu/ncsu/csc/itrust/controller/cptcode/CPTCodeController.java
+:100644 100644 b3ca3c80b728d802553d42a6387e075ca55aeec7 89b89837149a99276843408d5dff3a8a46791971 M	iTrust/src/main/edu/ncsu/csc/itrust/controller/cptcode/CPTCodeForm.java
+:100644 100644 277b7586fa9046d0580728f88e65450ba0e93ca5 780686ccb7f3b30192620724cf80f244c1de5aa5 M	iTrust/src/main/edu/ncsu/csc/itrust/controller/diagnosis/DiagnosisController.java
+:100644 100644 e6f431081b4e92595282a5d8d0d707b119018ba2 126a8c80124deea3dc3734256040d82e43feb3ac M	iTrust/src/main/edu/ncsu/csc/itrust/controller/diagnosis/DiagnosisForm.java
+:100644 100644 90783fc547c07682a8dd646542ceede68de3ba42 1ab88b796a4e18d9b6115cc60d0396ef1774efa5 M	iTrust/src/main/edu/ncsu/csc/itrust/controller/iTrustController.java
+:100644 100644 5149cc0880eda5678af2dffe1a560f6cf8894c5e a1c1d96af34040a77bda60669f7593b384a0841a M	iTrust/src/main/edu/ncsu/csc/itrust/controller/icdcode/ICDCodeForm.java
+:100644 100644 d3b3304c510223d9553f2cc279dfc3ef4ac9acbd 1a5116302372bb9a739511ad72b3739cb88936bb M	iTrust/src/main/edu/ncsu/csc/itrust/controller/immunization/ImmunizationController.java
+:100644 100644 50be0270ce8042f0719288e59d05b3bbad45d09b dd5a4d0bea14d61a4b7cfaad2f8d795d29351fa5 M	iTrust/src/main/edu/ncsu/csc/itrust/controller/immunization/ImmunizationForm.java
+:100644 100644 7956890830e3cdb9ab117b04b1bf77694d702abd 7b41bcc73251cf39084b01bada99a4442806e01d M	iTrust/src/main/edu/ncsu/csc/itrust/controller/labProcedure/LabProcedureController.java
+:100644 100644 8f39c083c6637b64c8aa78622d94e6e8e5428471 ee88a3342a71a3b2bc37233727543f973e3cdaa3 M	iTrust/src/main/edu/ncsu/csc/itrust/controller/labProcedure/LabProcedureForm.java
+:100644 100644 33ade9dbabef1d0c19d3fd9b0e40b326f4681779 d7618e8e8f6f7eeaba6640237f5e9fd9e3c84f2c M	iTrust/src/main/edu/ncsu/csc/itrust/controller/labtechnician/LabTechnicianController.java
+:100644 100644 e568e269b89e1f3cd4fd08461d0ed7869a17325a fa7977800e66d718d807c0acf10f22edd1aa60c4 M	iTrust/src/main/edu/ncsu/csc/itrust/controller/loinccode/LoincCodeForm.java
+:100644 100644 011d59fbdc54e24395fe8ce5eee1d8f099b449bb f3ea3198d2a7605292f00014b9d94aa545f83cd3 M	iTrust/src/main/edu/ncsu/csc/itrust/controller/medicalProcedure/MedicalProcedureController.java
+:100644 100644 0af40513ae2726f9970115aff6e673f43973b72b ce348bccca2e8d14563e20083d584141a70a49c9 M	iTrust/src/main/edu/ncsu/csc/itrust/controller/medicalProcedure/MedicalProcedureForm.java
+:100644 100644 f8b522af1c549e16663be333384ec4a5e3aeea53 b20374efa26a0f6336f57688e97a167daeb3af51 M	iTrust/src/main/edu/ncsu/csc/itrust/controller/ndcode/NDCCodeController.java
+:100644 100644 cba83fe55ee40832b72b831c84c0dfbb174608ad f2289fedde176d94066b056af9bbc0379b8f4a69 M	iTrust/src/main/edu/ncsu/csc/itrust/controller/ndcode/NDCCodeForm.java
+:100644 100644 b5804d9457392452289983e045337c56d8a3fa3f 452a22beb9d88dee14215ce4edc6ec0e3b832d5e M	iTrust/src/main/edu/ncsu/csc/itrust/controller/officeVisit/OfficeVisitController.java
+:100644 100644 d589d2d8ca8d8dd42fd9eabb111e26ce686c3643 4c7ea0233eb1b95181967ea0c78f4be753d97329 M	iTrust/src/main/edu/ncsu/csc/itrust/controller/officeVisit/OfficeVisitForm.java
+:100644 100644 e83cc86c8b40b92e86cd842b932d6ffab2b9d90a 8aca2fbc29244ecccbec073257d126360ad84eca M	iTrust/src/main/edu/ncsu/csc/itrust/controller/prescription/PrescriptionController.java
+:100644 100644 1ff6decd3ea1ef542c92ca4fbcc30ddeaae7cc5e 4b8c672ad8fb715a2c1da802b7f4a67140040182 M	iTrust/src/main/edu/ncsu/csc/itrust/controller/user/UserController.java
+:100644 100644 1491038917c581f703673b21a2b1b57b032386bd ef694de690f8a9d85ff1ef139d446933fd44f9f5 M	iTrust/src/main/edu/ncsu/csc/itrust/controller/user/patient/PatientController.java
+:100644 100644 04cbe624ebad23bc8f62a436419537442ebcd5b1 dbed5258ff80c1b0383606d2ab8a649e3ec778eb M	iTrust/src/main/edu/ncsu/csc/itrust/exception/DBException.java
+:100644 100644 c65dd5f10ac5405aad0aad3eaa96de10d4a3b431 3c47fe6e29d47d73ef891ea673eaac2c1120252a M	iTrust/src/main/edu/ncsu/csc/itrust/exception/ErrorList.java
+:100644 100644 449f004527800ad40895693b803d3d39d81209fe 5078a639129254ffc90395c29aef917fe5ce479a M	iTrust/src/main/edu/ncsu/csc/itrust/exception/FormValidationException.java
+:100644 100644 1d787d9f172449cf5e61d59e10d0f4fcaf6b0f9e 0f42d4a897fdfce1afd1d71ad6d69dd4a4e8f583 M	iTrust/src/main/edu/ncsu/csc/itrust/parser/ICDCodeParser.java
+:100644 100644 76ec9e93d9e62a8d6b782bc1bd142b4222c3d972 47765fb63cb37bf0d9d39de9dbea1ca7fb57af4b M	iTrust/src/main/edu/ncsu/csc/itrust/parser/LOINCCodeParser.java
+:100644 100644 c745f6b6b21e1ed49a78d685292bbe605a3252b6 4d3235e57c1018b08d37c9ffc4ab794bb57cc629 M	iTrust/src/main/edu/ncsu/csc/itrust/parser/NDCCodeParser.java
+:100644 100644 d6e16a3a956d194247adac219e08b7c2ce0302a2 2797e4940689541a1c3781d6db210e1259cec6a0 M	iTrust/src/main/edu/ncsu/csc/itrust/report/DemographicReportFilter.java
+:100644 100644 df609ad6f92162d0bdccb6b70f89ca9ff23571d7 cfc0924735af1ab9fa76323246dd530e0ce94049 M	iTrust/src/main/edu/ncsu/csc/itrust/report/MedicalReportFilter.java
+:100644 100644 4977f6296bf01bb7e1a95cad0d18747272be45f5 b620b608748d9a24ec3bd580b30ad35af5d46be6 M	iTrust/src/main/edu/ncsu/csc/itrust/server/FindExpertServlet.java
+:100644 100644 97d81d21703abc1f82c154207b1d2bfdff4498cb b9b68ec901f495cff02f7bc089847bff4b525974 M	iTrust/src/main/edu/ncsu/csc/itrust/server/GroupReportGeneratorServlet.java
+:100644 100644 69cdfb2e5581299c1c10a5918dfa73cd6a368c82 b2718247761e2072042af81f68c0c4dfabaadd46 M	iTrust/src/main/edu/ncsu/csc/itrust/server/PatientSearchServlet.java
+:100644 100644 d977ac9605d44d4c47b8c0d81ac1551d8859396d 547069cf047bde85b35ccac3d4227af756701947 M	iTrust/src/main/edu/ncsu/csc/itrust/server/RecordsReleaseServlet.java
+:100644 100644 732bdd3b9029dc5af34b7bc94d7c6edef0d03bd9 0b0ec88f6cfb48204ee405a6855f1629bcd1f0d6 M	iTrust/src/main/edu/ncsu/csc/itrust/server/SessionTimeoutListener.java
+:100644 100644 67a2c0d36c6bea5863733329acc486e8b6965f69 c993880c8cee44afa25b5f9be81f5e37bfa95248 M	iTrust/src/main/edu/ncsu/csc/itrust/server/WardCRUDServlet.java
+:100644 100644 60e7721df5c236aa742b79e05f6372edafb70dda a82bfd753cdbf9580cb800b167f2724254711777 M	iTrust/src/main/edu/ncsu/csc/itrust/server/WardRoomCRUDServlet.java
+:100644 100644 40184dc4323a729b62198793d5c2973d7ea57174 bb400a1509e4ba29fd5ee95b0d6e3c41f4566d4a M	iTrust/src/main/edu/ncsu/csc/itrust/tags/PatientNavigation.java
+:100644 100644 b22de22488abc398eb75d84c75fb4bef91e59593 562117bad4f0a5cebb8a7a6fdaa7e7a04da99b9f M	iTrust/src/main/edu/ncsu/csc/itrust/webutils/LocalDateConverter.java
+:100644 100644 a7649a1faf5a6abc3a4f65ea9a13ea4d0b6e0a6b 33f0a0c18d73a79017be133b35ed5441d0bff2a2 M	iTrust/src/main/edu/ncsu/csc/itrust/webutils/LocalDateTimeConverter.java
+:100644 100644 947f282befdc3afcffa95825176b56aa703e5553 75d4cc0182be6404d71bf1ef199d0f9415981805 M	iTrust/src/main/edu/ncsu/csc/itrust/webutils/SessionUtils.java

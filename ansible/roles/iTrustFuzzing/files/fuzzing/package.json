@@ -1,0 +1,12 @@
+{
+  "name": "fuzzing_package",
+  "version": "1.0.0",
+  "description": "Used to fuzz a java file to dig out errors in unit tests",
+  "main": "fuzz.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "glob": "^7.1.2",
+    "random-js": "^1.0.4"
+  }
+}
